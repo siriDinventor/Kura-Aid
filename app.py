@@ -18,7 +18,7 @@ fake_db = {
         },
 }
 locationDictionary = {
-    "Edo": ["Oredo", "Ikpoba-Okha"]
+    "Edo": ["Akoko-Edo", "Etsako East", "Etsako Central", "Etsako West", "Owan West", "Esan North-East", "Esan Central", "Esan South-east",  "Ovia South-West", "Ovia North-East", "Igueben", "Egor", "Uhunmwonde", "Oredo", "Ikpoba-Okha", "Orhionmwon", ]
 }
 HospitalDictionary = {
     "LGA": ["hb"]
