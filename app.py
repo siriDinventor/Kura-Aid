@@ -20,7 +20,9 @@ fake_db = {
 locationDictionary = {
     "Edo": ["Oredo", "Ikpoba-Okha"]
 }
-
+HospitalDictionary = {
+    "LGA": ["hb"]
+}
 def make_lga(p_response, lga_list, part = 0):
     i = 0
     if len(lga_list) < 8:
@@ -29,8 +31,13 @@ def make_lga(p_response, lga_list, part = 0):
             p_response += f"{j}. {i}\n"
             j += 1
         return p_response 
-
-
+def Hospital(LGA):
+    LGA = fake_db.get(phone_Number["LGA"])
+    hospitalList = HospitalDictionary.get(LGA)
+    response = "CON These are the list of hospitals:"
+    for i in hospitalList:
+        response += f"{1}\n"
+    return response
 def getState(text, phone_number):
     is_exist = ""
     if text == "":
@@ -49,7 +56,7 @@ def getState(text, phone_number):
         loc = locationDictionary[is_exist]
         return make_lga(res, loc, 0)
     else:
-        return "CON Learn how to spell your state"
+        return "CON spell your State correctly"
 
 def getLga(number, phone_number):
     if number == "":
@@ -59,14 +66,14 @@ def getLga(number, phone_number):
     main_list = locationDictionary[user.get("state")]
     p = user["part"]
     if len(main_list) < int(number) and int(number) < 1:
-        return "CON Please will you type your number\n"
+        return "CON Please type your number\n"
     else:
         l = main_list[int(number) - 1]
         user = fake_db.get(phone_number)
         user.update({"LGA": l})
         fake_db.update({str(phone_number): user})
-        response = "CON Welcome to Kura where yo have access to quality health services\n"
-        response += "1. Specialist \n"
+        response = "CON Welcome to Kura where you have access to quality health services\n"
+        response += "1. Specialist\n"
         response += "2. Reminder \n"
         response += "3. Pharmacy \n"
         response += "4. Hospital \n"
@@ -131,12 +138,17 @@ async def index(request: Request):
                 response = "END welldone you can read english"
                 return response
             elif text == "2":
-                response = "reminder"
+                response = "CON what type of reminder do you want?\n1. One time\n2. Repeat"
+                return response
+            elif text == "2*1":
+                response = "CON what do you want to reminded off?.. type away"
+            elif text == "2*2":
+                response = "CON what do you want to reminded off?.. type away"
                 return response
             elif text == "3":
                 response = "Pharmacy"
             elif text == "4":
-                response = "Hospital"
+                return Hospital(LGA)
             elif text == "5":
                 response = "Caretaker"
                 return response
