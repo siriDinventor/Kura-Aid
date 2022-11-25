@@ -36,7 +36,7 @@ def Hospital(LGA):
     hospitalList = HospitalDictionary.get(LGA)
     response = "CON These are the list of hospitals:"
     for i in hospitalList:
-        response += f"{1}\n"
+        response += f"{i}\n"
     return response
 def getState(text, phone_number):
     is_exist = ""
